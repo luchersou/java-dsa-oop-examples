@@ -1,0 +1,66 @@
+Graph Algorithms Guide
+
+#Summary
+This guide covers key graph algorithms implemented in the Java-DSA project, focusing on their characteristics, time and space complexity (Big O notation), and practical applications.
+
+
+
+#Dijkstra's Algorithm
+
+Description: A single-source shortest path algorithm that finds the shortest path from a source vertex to all other vertices in a weighted graph.
+Time Complexity:
+
+O(V²) with array implementation
+O((V + E) log V) with binary heap/priority queue
+O(E + V log V) with Fibonacci heap (theoretical)
+
+Space Complexity: O(V)
+Key Characteristics:
+
+Works for graphs with non-negative edge weights
+Greedy algorithm approach
+Uses a priority queue/min-heap for efficient implementation
+Cannot handle negative edge weights (may produce incorrect results)
+Solves single-source shortest path problem
+Widely used in routing protocols and navigation systems
+
+
+
+#Floyd-Warshall Algorithm
+
+Description: An all-pairs shortest path algorithm that finds the shortest paths between all pairs of vertices in a weighted graph.
+Time Complexity: O(V³)
+Space Complexity: O(V²)
+Key Characteristics:
+
+Dynamic programming approach
+Works with negative edge weights (but not negative cycles)
+Can detect negative cycles in the graph
+Simpler to implement than running Dijkstra from each vertex
+Solves all-pairs shortest path problem
+Preferred when the graph is dense and all shortest paths are needed
+Suitable for transitivity closure and path reconstruction
+
+
+
+#Practical Applications
+
+#Dijkstra's Algorithm
+
+Network routing protocols
+GPS navigation systems
+Road network pathfinding
+Robot motion planning
+Flight scheduling
+Telecommunications network design
+
+
+
+#Floyd-Warshall Algorithm
+
+Network optimization
+Traffic routing systems
+Finding transitive closure of a graph
+Detecting negative cycles
+Solving the all-pairs shortest path problem in small graphs
+Computing the diameter of a graph

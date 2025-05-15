@@ -1,0 +1,144 @@
+Key Benefits of Encapsulation:
+
+-Data Protection: Prevents invalid state (e.g., negative battery levels)
+-Implementation Hiding: Internal changes don't affect class users
+-Controlled Access: Validation in setters maintains object integrity
+-Reduced Coupling: Clients depend on interfaces, not implementations
+
+Remember: In Java, encapsulation is achieved by:
+
+Making fields private
+Providing controlled access via public methods
+Using interfaces to define contracts
+Applying the principle of "information hiding"
+
+
+
+#1. Access Modifiers
+
+public class BankAccount {
+    private String accountNumber; // private - only accessible within class
+    double balance;              // default (package-private)
+    protected String owner;      // protected - accessible in package + subclasses
+    public final String BANK_CODE = "XYZ"; // public constant
+}
+
+
+
+#2. Getters and Setters (Accessor Methods)
+
+public class Employee {
+    private String name;
+    private double salary;
+
+    // Getter
+    public String getName() {
+        return name;
+    }
+
+    // Setter with validation
+    public void setName(String name) {
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name;
+        }
+    }
+
+    // Read-only property (no setter)
+    public double getSalary() {
+        return salary;
+    }
+}
+
+
+
+#3. Public Methods for Controlled Operations
+
+public class Thermostat {
+    private int currentTemperature;
+
+    public void increaseTemperature(int degrees) {
+        if (degrees > 0 && currentTemperature + degrees <= 100) {
+            currentTemperature += degrees;
+        }
+    }
+
+    public void emergencyShutdown() {
+        currentTemperature = 0;
+        System.out.println("System shutdown!");
+    }
+}
+
+
+
+#4. Constructors with Validation
+
+public class Product {
+    private String id;
+    private double price;
+
+    public Product(String id, double price) {
+        if (price >= 0) {
+            this.id = id;
+            this.price = price;
+        } else {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+    }
+}
+
+
+
+#5. Final Classes and Methods
+
+public final class MathConstants { // Cannot be subclassed
+    public static final double PI = 3.14159;
+
+    public final void displayConstants() { // Cannot be overridden
+        System.out.println("PI: " + PI);
+    }
+}
+
+
+
+#6. Encapsulation with Inner Classes
+
+public class Computer {
+    private String model;
+
+    // Private inner class
+    private class CPU {
+        private String architecture;
+
+        void process() {
+            System.out.println(model + " processing..."); // Can access outer class members
+        }
+    }
+
+    public void start() {
+        CPU cpu = new CPU();
+        cpu.process();
+    }
+}
+
+
+
+#7. Interface-Based Encapsulation
+
+public interface PaymentGateway {
+    boolean processPayment(double amount);
+}
+
+public class PayPalGateway implements PaymentGateway {
+    private String apiKey;
+
+    public PayPalGateway(String key) {
+        this.apiKey = key;
+    }
+
+    @Override
+    public boolean processPayment(double amount) {
+        // Implementation hidden from clients
+        System.out.println("Processing $" + amount + " via PayPal");
+        return true;
+    }
+}

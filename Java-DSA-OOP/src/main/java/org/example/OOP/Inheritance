@@ -1,0 +1,279 @@
+Key Inheritance Concepts:
+
+extends Keyword: Establishes parent-child relationship.
+super: Accesses parent class members/constructors.
+
+Access Control:
+-private: Not inherited
+-protected: Inherited and accessible in subclasses
+-public: Fully inherited
+
+Single Inheritance: Java classes can only extend one parent class.
+All Classes Inherit from Object: Even if not explicitly stated.
+
+Inheritance enables:
+Code reusability
+Method overriding (polymorphism)
+Hierarchical classifications
+The "is-a" relationship (e.g., "a Car is a Vehicle")
+
+
+
+#1. Basic Inheritance (Extending a Class)
+
+// Parent class (Superclass)
+class Vehicle {
+    protected String brand;  // Accessible to child classes
+
+    public void honk() {
+        System.out.println("Beep beep!");
+    }
+}
+
+// Child class (Subclass)
+class Car extends Vehicle {  // 'extends' keyword
+    private int numDoors;
+
+    public Car(String brand, int doors) {
+        this.brand = brand;    // Inherited field
+        this.numDoors = doors;
+    }
+
+    public void display() {
+        System.out.println("Brand: " + brand + ", Doors: " + numDoors);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car("Toyota", 4);
+        myCar.honk();      // Inherited method
+        myCar.display();   // Child class method
+
+        //Output:
+        //Beep beep!
+        //Brand: Toyota, Doors: 4
+    }
+}
+
+
+
+#2. Multilevel Inheritance
+
+class Animal {
+    void eat() {
+        System.out.println("Eating...");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Barking...");
+    }
+}
+
+class Puppy extends Dog {
+    void weep() {
+        System.out.println("Weeping...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Puppy baby = new Puppy();
+        baby.eat();   // From Animal
+        baby.bark();  // From Dog
+        baby.weep();  // From Puppy
+    }
+}
+
+
+
+#3. Hierarchical Inheritance
+
+class Shape {
+    void draw() {
+        System.out.println("Drawing a shape");
+    }
+}
+
+class Circle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("Drawing a circle");
+    }
+}
+
+class Square extends Shape {
+    @Override
+    void draw() {
+        System.out.println("Drawing a square");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape s1 = new Circle();
+        Shape s2 = new Square();
+
+        s1.draw();  // Output: "Drawing a circle"
+        s2.draw();  // Output: "Drawing a square"
+    }
+}
+
+
+
+#4. Inheritance with Constructors
+
+class Person {
+    private String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+class Student extends Person {
+    private int studentId;
+
+    public Student(String name, int id) {
+        super(name);  // Calls parent constructor
+        this.studentId = id;
+    }
+
+    public void display() {
+        System.out.println("Student: " + getName() + ", ID: " + studentId);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student("Alice", 12345);
+        s.display();
+
+        //Output:
+        //Student: Alice, ID: 12345
+    }
+}
+
+
+
+#5. Method Overriding with @Override
+
+class Bank {
+    double getInterestRate() {
+        return 0.0;
+    }
+}
+
+class Chase extends Bank {
+    @Override
+    double getInterestRate() {
+        return 2.5;
+    }
+}
+
+class BOA extends Bank {
+    @Override
+    double getInterestRate() {
+        return 1.8;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Bank myBank = new Chase();
+        System.out.println("Interest rate: " + myBank.getInterestRate() + "%");
+
+        //Output:
+        //Interest rate: 2.5%
+    }
+}
+
+
+
+#6. The super Keyword
+
+class Parent {
+    String message = "Parent message";
+
+    void display() {
+        System.out.println(message);
+    }
+}
+
+class Child extends Parent {
+    String message = "Child message";
+
+    @Override
+    void display() {
+        super.display();  // Calls parent's method
+        System.out.println(super.message + " and " + message);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.display();
+
+        //Output:
+        //Parent message
+        //Parent message and Child message
+    }
+}
+
+
+
+#7. Preventing Inheritance with final
+
+final class CannotBeExtended {  // Cannot be inherited
+    public void show() {
+        System.out.println("This class is final");
+    }
+}
+
+// This would cause a compile error:
+// class TryToExtend extends CannotBeExtended {}
+
+public class Main {
+    public static void main(String[] args) {
+        CannotBeExtended obj = new CannotBeExtended();
+        obj.show();
+    }
+}
+
+
+
+#8. Inheritance with Abstract Classes
+
+abstract class Animal {
+    abstract void makeSound();  // Abstract method (no implementation)
+
+    void breathe() {
+        System.out.println("Breathing...");
+    }
+}
+
+class Lion extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Roar!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Lion();
+        myAnimal.makeSound();
+        myAnimal.breathe();
+
+        //Output:
+        //Roar!
+        //Breathing...
+    }
+}

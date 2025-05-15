@@ -1,0 +1,88 @@
+Search Algorithms Guide
+
+#Summary
+This guide covers the key search algorithms implemented in the Java-DSA project, focusing on their characteristics, time and space complexity (Big O notation), and practical applications.
+
+
+
+#BFS (Breadth-First Search)
+
+Description: Traverses or searches a graph level by level, exploring all neighbors of a node before moving to the next level.
+Time Complexity: O(V + E) where V is vertices and E is edges
+Space Complexity: O(V) for the queue
+Key Characteristics:
+
+Uses a queue data structure
+Finds the shortest path in unweighted graphs
+Complete algorithm (will find a solution if one exists)
+Not optimal for weighted graphs
+
+
+
+#Binary Search
+
+Description: Efficient search algorithm for sorted arrays, repeatedly dividing the search interval in half.
+Time Complexity: O(log n)
+Space Complexity: O(1) iterative, O(log n) recursive
+Key Characteristics:
+
+Requires sorted data
+Significantly faster than linear search for large datasets
+Divides the search space in half with each step
+Works on arrays or similar structures with O(1) random access
+
+
+
+#Binary Tree Search
+
+Description: Search operation in a binary search tree (BST) structure.
+Time Complexity: O(h) where h is the height of the tree (best case O(log n), worst case O(n))
+Space Complexity: O(h) recursive, O(1) iterative
+Key Characteristics:
+
+Efficient for balanced trees
+Performance degrades if tree becomes unbalanced
+Supports dynamic dataset operations (insert, delete)
+Maintains sorted order
+
+
+
+#DFS (Depth-First Search)
+
+Description: Traverses or searches a graph by exploring as far as possible along each branch before backtracking.
+Time Complexity: O(V + E) where V is vertices and E is edges
+Space Complexity: O(V) for the stack
+Key Characteristics:
+
+Uses a stack data structure (or recursion)
+Memory-efficient for deep graphs
+Not guaranteed to find shortest path
+Useful for topological sorting, cycle detection, and solving mazes
+
+
+
+#Knuth-Morris-Pratt (KMP)
+
+Description: String-searching algorithm that uses information about previous matches to minimize comparisons.
+Time Complexity: O(n + m) where n is text length and m is pattern length
+Space Complexity: O(m)
+Key Characteristics:
+
+Avoids unnecessary character comparisons
+Uses a prefix table (failure function)
+Particularly efficient for patterns with repeated substrings
+No backtracking in the main search phase
+
+
+
+#Linear Search
+
+Description: Simple search method that checks each element sequentially until finding the target.
+Time Complexity: O(n)
+Space Complexity: O(1)
+Key Characteristics:
+
+Works on unsorted data
+Easy to implement
+Inefficient for large datasets
+Suitable for small arrays or when elements are expected to be near the beginning

@@ -1,0 +1,126 @@
+Sorting Algorithms Guide
+
+#Summary
+This guide covers the key sorting algorithms implemented in the Java-DSA project, focusing on their characteristics, time and space complexity (Big O notation), stability, and practical applications.
+
+
+
+#Bubble Sort
+
+Description: Simple comparison-based algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
+Time Complexity:
+
+Best case: O(n) when array is already sorted
+Average case: O(n²)
+Worst case: O(n²)
+
+Space Complexity: O(1)
+Key Characteristics:
+
+Stable sort (preserves order of equal elements)
+In-place algorithm (requires constant extra space)
+Simple to implement
+Inefficient for large datasets
+Performs well on small datasets or nearly sorted data
+
+
+
+#Heap Sort
+
+Description: Comparison-based sorting algorithm that uses a binary heap data structure to build a max-heap and repeatedly extract the maximum element.
+Time Complexity:
+
+Best case: O(n log n)
+Average case: O(n log n)
+Worst case: O(n log n)
+
+Space Complexity: O(1)
+Key Characteristics:
+
+Not stable (doesn't preserve order of equal elements)
+In-place algorithm
+Efficient for large datasets
+No worst-case scenarios like QuickSort
+Combines the speed of QuickSort with the reliability of MergeSort
+
+
+
+#Insertion Sort
+
+Description: Builds the sorted array one element at a time by repeatedly taking the next element and inserting it into its correct position.
+Time Complexity:
+
+Best case: O(n) when array is already sorted
+Average case: O(n²)
+Worst case: O(n²)
+
+
+Space Complexity: O(1)
+Key Characteristics:
+
+Stable sort
+In-place algorithm
+Efficient for small datasets or nearly sorted data
+Adaptive (performs better on partially sorted arrays)
+Online algorithm (can sort as it receives input)
+
+
+
+#Merge Sort
+
+Description: Divide and conquer algorithm that divides the input array into two halves, recursively sorts them, and then merges the sorted halves.
+Time Complexity:
+
+Best case: O(n log n)
+Average case: O(n log n)
+Worst case: O(n log n)
+
+Space Complexity: O(n)
+Key Characteristics:
+
+Stable sort
+Not in-place (requires additional space)
+Consistent performance regardless of input data
+Parallelizable
+Preferred for linked lists
+
+
+
+#Quick Sort
+
+Description: Divide and conquer algorithm that selects a pivot element and partitions the array around it, recursively sorting the sub-arrays.
+Time Complexity:
+
+Best case: O(n log n)
+Average case: O(n log n)
+Worst case: O(n²) when poorly implemented or with bad pivot selection
+
+Space Complexity: O(log n) for recursion stack
+Key Characteristics:
+
+Not stable (in typical implementations)
+In-place algorithm
+Very efficient for average cases
+Performance depends on pivot selection
+Cache-friendly
+
+
+
+#Selection Sort
+
+Description: Simple comparison sort that divides the input into a sorted and unsorted region, repeatedly finding the minimum element from the unsorted region and moving it to the sorted region.
+Time Complexity:
+
+Best case: O(n²)
+Average case: O(n²)
+Worst case: O(n²)
+
+Space Complexity: O(1)
+Key Characteristics:
+
+Not stable (in typical implementations)
+In-place algorithm
+Simple to implement
+Makes the minimum number of swaps (n-1)
+Inefficient for large datasets
+Performance is independent of input ordering

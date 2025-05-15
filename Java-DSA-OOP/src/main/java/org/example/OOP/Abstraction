@@ -1,0 +1,297 @@
+Key Abstraction Concepts:
+
+-Abstract Classes:
+Can have both abstract and concrete methods
+Support constructors
+Used for "is-a" relationships with shared code
+
+-Interfaces:
+100% abstract (before Java 8)
+Allow multiple inheritance
+Used for "can-do" capabilities
+
+-Purpose of Abstraction:
+Hide implementation details
+Enforce method implementation
+Create flexible architectures
+Reduce code duplication
+
+-When to Use:
+Abstract class: When you need to share code among related classes
+Interface: When you need to define a contract for unrelated classes
+
+-Abstraction helps in:
+Creating maintainable systems
+Building loosely coupled components
+Establishing clear hierarchies
+Supporting polymorphism
+
+
+
+#1. Abstract Classes (Partial Abstraction)
+
+// Abstract class (cannot be instantiated)
+abstract class Animal {
+    // Abstract method (no implementation)
+    public abstract void makeSound();
+
+    // Concrete method
+    public void breathe() {
+        System.out.println("All animals breathe");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void makeSound() {  // Must implement abstract method
+        System.out.println("Bark!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myDog = new Dog();
+        myDog.makeSound();  // Output: "Bark!"
+        myDog.breathe();    // Output: "All animals breathe"
+
+        // Animal animal = new Animal(); // Error: cannot instantiate abstract class
+    }
+}
+
+
+
+#2. Interfaces (Full Abstraction)
+
+// Interface (100% abstract prior to Java 8)
+interface Shape {
+    double calculateArea();  // Abstract method (no body)
+
+    // Default method (Java 8+)
+    default void display() {
+        System.out.println("Displaying shape");
+    }
+
+    // Static method (Java 8+)
+    static void printType() {
+        System.out.println("I'm a shape");
+    }
+}
+
+class Circle implements Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape circle = new Circle(5.0);
+        System.out.println("Area: " + circle.calculateArea());  // 78.539...
+        circle.display();      // Default method
+        Shape.printType();     // Static method
+    }
+}
+
+
+
+#3. Abstract Class vs Interface
+
+// Abstract class for shared characteristics
+abstract class Bird {
+    abstract void fly();
+
+    void breathe() {
+        System.out.println("Breathing...");
+    }
+}
+
+// Interface for specific capability
+interface Singable {
+    void sing();
+}
+
+class Sparrow extends Bird implements Singable {
+    @Override
+    void fly() {
+        System.out.println("Flying low");
+    }
+
+    @Override
+    public void sing() {
+        System.out.println("Chirp chirp!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Sparrow s = new Sparrow();
+        s.fly();
+        s.sing();
+        s.breathe();
+
+        //Output:
+        //Flying low
+        //Chirp chirp!
+        //Breathing...
+    }
+}
+
+
+
+#4. Abstract Class with Constructor
+
+abstract class Employee {
+    protected String name;
+    protected double baseSalary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.baseSalary = salary;
+    }
+
+    abstract double calculateBonus();
+
+    void displayInfo() {
+        System.out.println("Name: " + name);
+    }
+}
+
+class Manager extends Employee {
+    public Manager(String name, double salary) {
+        super(name, salary);
+    }
+
+    @Override
+    double calculateBonus() {
+        return baseSalary * 0.25;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee emp = new Manager("John", 80000);
+        emp.displayInfo();
+        System.out.println("Bonus: $" + emp.calculateBonus());
+    }
+}
+
+
+
+#5. Multiple Interfaces (Java's Way of Multiple Inheritance)
+
+interface Walkable {
+    void walk();
+}
+
+interface Swimmable {
+    void swim();
+}
+
+class Duck implements Walkable, Swimmable {
+    @Override
+    public void walk() {
+        System.out.println("Duck walking");
+    }
+
+    @Override
+    public void swim() {
+        System.out.println("Duck swimming");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Duck duck = new Duck();
+        duck.walk();
+        duck.swim();
+    }
+}
+
+
+
+#6. Abstract Methods in Interfaces (Pre-Java 8)
+
+interface Database {
+    // Traditional interface methods (implicitly public abstract)
+    void connect();
+    void disconnect();
+    void executeQuery(String query);
+}
+
+class MySQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("MySQL connected");
+    }
+
+    @Override
+    public void disconnect() {
+        System.out.println("MySQL disconnected");
+    }
+
+    @Override
+    public void executeQuery(String query) {
+        System.out.println("Executing MySQL query: " + query);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Database db = new MySQLDatabase();
+        db.connect();
+        db.executeQuery("SELECT * FROM users");
+        db.disconnect();
+    }
+}
+
+
+
+#7. Practical Abstraction Example (Payment System)
+
+abstract class Payment {
+    protected double amount;
+
+    public Payment(double amount) {
+        this.amount = amount;
+    }
+
+    abstract void processPayment();
+
+    void printReceipt() {
+        System.out.println("Payment of $" + amount + " processed");
+    }
+}
+
+class CreditCardPayment extends Payment {
+    private String cardNumber;
+
+    public CreditCardPayment(double amount, String cardNumber) {
+        super(amount);
+        this.cardNumber = cardNumber;
+    }
+
+    @Override
+    void processPayment() {
+        System.out.println("Processing credit card payment with card ending in "
+            + cardNumber.substring(cardNumber.length() - 4));
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Payment payment = new CreditCardPayment(99.99, "1234567890123456");
+        payment.processPayment();
+        payment.printReceipt();
+
+        //Output:
+        //Processing credit card payment with card ending in 3456
+        //Payment of $99.99 processed
+    }
+}

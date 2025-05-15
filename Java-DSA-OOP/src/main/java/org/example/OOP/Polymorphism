@@ -1,0 +1,202 @@
+Key Concepts of Polymorphism:
+
+-Runtime Polymorphism: Achieved via method overriding (JVM decides which method to call at runtime).
+-Compile-Time Polymorphism: Achieved via method overloading (compiler decides which method to call).
+-"One Interface, Multiple Implementations": Allows objects of different types to be treated as objects of a common supertype.
+-Flexibility: Enables writing code that works with general types rather than specific implementations.
+
+Polymorphism is essential for:
+
+-Writing extensible code (easy to add new subclasses)
+-Reducing code duplication
+-Supporting design patterns like Strategy, Factory, etc.
+
+
+
+#1. Method Overriding (Runtime Polymorphism)
+
+class Animal {
+    public void makeSound() {
+        System.out.println("Some generic animal sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Bark!");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Meow!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Animal();  // Parent class
+        Animal myDog = new Dog();       // Child class
+        Animal myCat = new Cat();       // Child class
+
+        myAnimal.makeSound();  // Output: "Some generic animal sound"
+        myDog.makeSound();     // Output: "Bark!" (Runtime decision)
+        myCat.makeSound();     // Output: "Meow!" (Runtime decision)
+    }
+}
+
+
+
+#2. Method Overloading (Compile-Time Polymorphism)
+
+class Calculator {
+    // Same method name, different parameters
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public double add(double a, double b) {
+        return a + b;
+    }
+
+    public String add(String a, String b) {
+        return a.concat(b);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+
+        System.out.println(calc.add(5, 7));        // Output: 12 (int version)
+        System.out.println(calc.add(3.2, 4.8));    // Output: 8.0 (double version)
+        System.out.println(calc.add("Hello", "World")); // Output: "HelloWorld"
+    }
+}
+
+
+
+#3. Interface Polymorphism
+
+interface Shape {
+    double calculateArea();
+}
+
+class Circle implements Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Square implements Shape {
+    private double side;
+
+    public Square(double side) {
+        this.side = side;
+    }
+
+    @Override
+    public double calculateArea() {
+        return side * side;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape circle = new Circle(5.0);
+        Shape square = new Square(4.0);
+
+        System.out.println("Circle area: " + circle.calculateArea());  // 78.539...
+        System.out.println("Square area: " + square.calculateArea());  // 16.0
+    }
+}
+
+
+
+#4. Polymorphism with Abstract Classes
+
+abstract class Vehicle {
+    abstract void startEngine();
+}
+
+class Car extends Vehicle {
+    @Override
+    void startEngine() {
+        System.out.println("Car engine started with a key");
+    }
+}
+
+class Tesla extends Vehicle {
+    @Override
+    void startEngine() {
+        System.out.println("Tesla activated via app");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle vehicle1 = new Car();
+        Vehicle vehicle2 = new Tesla();
+
+        vehicle1.startEngine();  // Output: "Car engine started with a key"
+        vehicle2.startEngine();  // Output: "Tesla activated via app"
+    }
+}
+
+
+
+#5. Polymorphic Collections
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Shape> shapes = new ArrayList<>();
+        shapes.add(new Circle(3.0));
+        shapes.add(new Square(2.5));
+
+        for (Shape shape : shapes) {
+            System.out.println("Area: " + shape.calculateArea());
+        }
+    }
+}
+
+
+
+#6. Dynamic Method Dispatch (Advanced Polymorphism)
+
+class Parent {
+    void show() {
+        System.out.println("Parent's show()");
+    }
+}
+
+class Child extends Parent {
+    @Override
+    void show() {
+        System.out.println("Child's show()");
+    }
+
+    void specialMethod() {
+        System.out.println("Only in Child class");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Parent obj = new Child();  // Upcasting
+        obj.show();               // Output: "Child's show()"
+
+        // obj.specialMethod();    // Compile error! Parent reference can't see child-specific methods
+    }
+}
