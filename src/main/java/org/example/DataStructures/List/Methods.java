@@ -39,157 +39,161 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 public class ListMethodsExample {
     public static void main(String[] args) {
-        List<String> lista = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         
-        // ===== MÉTODOS DE ADIÇÃO =====
-        System.out.println("=== MÉTODOS DE ADIÇÃO ===");
-        lista.add("Java");                    // Adiciona no final
-        lista.add("Python");
-        lista.add("JavaScript");
-        lista.add(1, "C++");                  // Adiciona na posição 1
-        System.out.println("Após adições: " + lista);
+        // ===== ADDITION METHODS =====
+        System.out.println("=== ADDITION METHODS ===");
+        list.add("Java");                    // Add at the end
+        list.add("Python");
+        list.add("JavaScript");
+        list.add(1, "C++");                  // Add at position 1
+        System.out.println("After additions: " + list);
         
-        List<String> outraLista = Arrays.asList("Go", "Rust");
-        lista.addAll(outraLista);             // Adiciona coleção no final
-        lista.addAll(2, Arrays.asList("C#", "Swift")); // Adiciona coleção na posição 2
-        System.out.println("Após addAll: " + lista);
+        List<String> anotherList = Arrays.asList("Go", "Rust");
+        list.addAll(anotherList);             // Add collection at the end
+        list.addAll(2, Arrays.asList("C#", "Swift")); // Add collection at position 2
+        System.out.println("After addAll: " + list);
         
-        // ===== MÉTODOS DE ACESSO =====
-        System.out.println("\n=== MÉTODOS DE ACESSO ===");
-        System.out.println("Elemento na posição 0: " + lista.get(0));
-        System.out.println("Tamanho da lista: " + lista.size());
-        System.out.println("Lista vazia? " + lista.isEmpty());
-        System.out.println("Contém 'Java'? " + lista.contains("Java"));
-        System.out.println("Contém todos de outraLista? " + lista.containsAll(outraLista));
+        // ===== ACCESS METHODS =====
+        System.out.println("\n=== ACCESS METHODS ===");
+        System.out.println("Element at position 0: " + list.get(0));
+        System.out.println("List size: " + list.size());
+        System.out.println("List empty? " + list.isEmpty());
+        System.out.println("Contains 'Java'? " + list.contains("Java"));
+        System.out.println("Contains all from anotherList? " + list.containsAll(anotherList));
         
-        // ===== MÉTODOS DE BUSCA =====
-        System.out.println("\n=== MÉTODOS DE BUSCA ===");
-        System.out.println("Primeiro índice de 'Java': " + lista.indexOf("Java"));
-        System.out.println("Último índice de 'Java': " + lista.lastIndexOf("Java"));
-        System.out.println("Índice de 'Kotlin' (não existe): " + lista.indexOf("Kotlin"));
+        // ===== SEARCH METHODS =====
+        System.out.println("\n=== SEARCH METHODS ===");
+        System.out.println("First index of 'Java': " + list.indexOf("Java"));
+        System.out.println("Last index of 'Java': " + list.lastIndexOf("Java"));
+        System.out.println("Index of 'Kotlin' (doesn't exist): " + list.indexOf("Kotlin"));
         
-        // ===== MÉTODOS DE MODIFICAÇÃO =====
-        System.out.println("\n=== MÉTODOS DE MODIFICAÇÃO ===");
-        String elementoSubstituido = lista.set(0, "Kotlin"); // Substitui elemento na posição 0
-        System.out.println("Elemento substituído: " + elementoSubstituido);
-        System.out.println("Lista após substituição: " + lista);
+        // ===== MODIFICATION METHODS =====
+        System.out.println("\n=== MODIFICATION METHODS ===");
+        String replacedElement = list.set(0, "Kotlin"); // Replace element at position 0
+        System.out.println("Replaced element: " + replacedElement);
+        System.out.println("List after replacement: " + list);
         
-        // ===== MÉTODOS DE REMOÇÃO =====
-        System.out.println("\n=== MÉTODOS DE REMOÇÃO ===");
-        String removidoPorIndice = lista.remove(1);      // Remove por índice
-        System.out.println("Removido por índice 1: " + removidoPorIndice);
+        // ===== REMOVAL METHODS =====
+        System.out.println("\n=== REMOVAL METHODS ===");
+        String removedByIndex = list.remove(1);      // Remove by index
+        System.out.println("Removed by index 1: " + removedByIndex);
         
-        boolean removidoPorValor = lista.remove("Swift"); // Remove por valor
-        System.out.println("'Swift' removido? " + removidoPorValor);
-        System.out.println("Lista após remoções: " + lista);
+        boolean removedByValue = list.remove("Swift"); // Remove by value
+        System.out.println("'Swift' removed? " + removedByValue);
+        System.out.println("List after removals: " + list);
         
-        // ===== SUBLISTA =====
-        System.out.println("\n=== SUBLISTA ===");
-        List<String> sublista = lista.subList(1, 4); // Elementos do índice 1 ao 3
-        System.out.println("Sublista (1-3): " + sublista);
+        // ===== SUBLIST =====
+        System.out.println("\n=== SUBLIST ===");
+        List<String> sublist = list.subList(1, 4); // Elements from index 1 to 3
+        System.out.println("Sublist (1-3): " + sublist);
         
-        // ===== CONVERSÃO PARA ARRAY =====
-        System.out.println("\n=== CONVERSÃO PARA ARRAY ===");
-        Object[] array = lista.toArray();
-        System.out.println("Array de Object: " + Arrays.toString(array));
+        // ===== ARRAY CONVERSION =====
+        System.out.println("\n=== ARRAY CONVERSION ===");
+        Object[] array = list.toArray();
+        System.out.println("Object array: " + Arrays.toString(array));
         
-        String[] stringArray = lista.toArray(new String[0]);
-        System.out.println("Array de String: " + Arrays.toString(stringArray));
+        String[] stringArray = list.toArray(new String[0]);
+        System.out.println("String array: " + Arrays.toString(stringArray));
         
-        // ===== ITERAÇÃO =====
-        System.out.println("\n=== ITERAÇÃO ===");
+        // ===== ITERATION =====
+        System.out.println("\n=== ITERATION ===");
         
-        // Iterator simples
-        System.out.println("Com Iterator:");
-        Iterator<String> it = lista.iterator();
+        // Simple Iterator
+        System.out.println("With Iterator:");
+        Iterator<String> it = list.iterator();
         while (it.hasNext()) {
             System.out.print(it.next() + " ");
         }
         System.out.println();
         
-        // ListIterator (bidirecional)
-        System.out.println("Com ListIterator (reverso):");
-        ListIterator<String> listIt = lista.listIterator(lista.size());
+        // ListIterator (bidirectional)
+        System.out.println("With ListIterator (reverse):");
+        ListIterator<String> listIt = list.listIterator(list.size());
         while (listIt.hasPrevious()) {
             System.out.print(listIt.previous() + " ");
         }
         System.out.println();
         
         // Enhanced for loop
-        System.out.println("Com enhanced for:");
-        for (String linguagem : lista) {
-            System.out.print(linguagem + " ");
+        System.out.println("With enhanced for:");
+        for (String language : list) {
+            System.out.print(language + " ");
         }
         System.out.println();
         
-        // ===== MÉTODOS JAVA 8+ =====
-        System.out.println("\n=== MÉTODOS JAVA 8+ ===");
+        // ===== JAVA 8+ METHODS =====
+        System.out.println("\n=== JAVA 8+ METHODS ===");
         
-        // forEach com Consumer
-        System.out.println("Com forEach:");
-        lista.forEach(linguagem -> System.out.print(linguagem.toUpperCase() + " "));
+        // forEach with Consumer
+        System.out.println("With forEach:");
+        list.forEach(language -> System.out.print(language.toUpperCase() + " "));
         System.out.println();
         
-        // removeIf com Predicate
-        List<String> listaParaRemover = new ArrayList<>(lista);
-        boolean removeuAlgum = listaParaRemover.removeIf(s -> s.length() < 4);
-        System.out.println("Removeu elementos com menos de 4 chars? " + removeuAlgum);
-        System.out.println("Lista após removeIf: " + listaParaRemover);
+        // removeIf with Predicate
+        List<String> listToRemove = new ArrayList<>(list);
+        boolean removedSome = listToRemove.removeIf(s -> s.length() < 4);
+        System.out.println("Removed elements with less than 4 chars? " + removedSome);
+        System.out.println("List after removeIf: " + listToRemove);
         
-        // replaceAll com UnaryOperator
-        List<String> listaParaSubstituir = new ArrayList<>(lista);
-        listaParaSubstituir.replaceAll(String::toLowerCase);
-        System.out.println("Lista após replaceAll (toLowerCase): " + listaParaSubstituir);
+        // replaceAll with UnaryOperator
+        List<String> listToReplace = new ArrayList<>(list);
+        listToReplace.replaceAll(String::toLowerCase);
+        System.out.println("List after replaceAll (toLowerCase): " + listToReplace);
         
-        // sort com Comparator
-        List<String> listaParaOrdenar = new ArrayList<>(lista);
-        listaParaOrdenar.sort(String.CASE_INSENSITIVE_ORDER);
-        System.out.println("Lista ordenada: " + listaParaOrdenar);
+        // sort with Comparator
+        List<String> listToSort = new ArrayList<>(list);
+        listToSort.sort(String.CASE_INSENSITIVE_ORDER);
+        System.out.println("Sorted list: " + listToSort);
         
         // Stream operations
-        System.out.println("Linguagens que começam com 'J':");
-        lista.stream()
+        System.out.println("Languages that start with 'J':");
+        list.stream()
              .filter(s -> s.startsWith("J"))
              .forEach(System.out::println);
         
-        // ===== OPERAÇÕES DE CONJUNTO =====
-        System.out.println("\n=== OPERAÇÕES DE CONJUNTO ===");
-        List<String> lista1 = new ArrayList<>(Arrays.asList("Java", "Python", "C++"));
-        List<String> lista2 = new ArrayList<>(Arrays.asList("Python", "JavaScript", "Go"));
+        // ===== SET OPERATIONS =====
+        System.out.println("\n=== SET OPERATIONS ===");
+        List<String> list1 = new ArrayList<>(Arrays.asList("Java", "Python", "C++"));
+        List<String> list2 = new ArrayList<>(Arrays.asList("Python", "JavaScript", "Go"));
         
-        // retainAll (interseção)
-        List<String> intersecao = new ArrayList<>(lista1);
-        intersecao.retainAll(lista2);
-        System.out.println("Interseção: " + intersecao);
+        // retainAll (intersection)
+        List<String> intersection = new ArrayList<>(list1);
+        intersection.retainAll(list2);
+        System.out.println("Intersection: " + intersection);
         
-        // removeAll (diferença)
-        List<String> diferenca = new ArrayList<>(lista1);
-        diferenca.removeAll(lista2);
-        System.out.println("Diferença (lista1 - lista2): " + diferenca);
+        // removeAll (difference)
+        List<String> difference = new ArrayList<>(list1);
+        difference.removeAll(list2);
+        System.out.println("Difference (list1 - list2): " + difference);
         
-        // ===== MÉTODOS ESPECIAIS DO LISTITERATOR =====
-        System.out.println("\n=== MÉTODOS ESPECIAIS DO LISTITERATOR ===");
-        ListIterator<String> specialIt = lista.listIterator();
+        // ===== SPECIAL LISTITERATOR METHODS =====
+        System.out.println("\n=== SPECIAL LISTITERATOR METHODS ===");
+        ListIterator<String> specialIt = list.listIterator();
         
         if (specialIt.hasNext()) {
-            System.out.println("Próximo elemento: " + specialIt.next());
-            System.out.println("Índice atual: " + specialIt.nextIndex());
-            System.out.println("Índice anterior: " + specialIt.previousIndex());
+            System.out.println("Next element: " + specialIt.next());
+            System.out.println("Current index: " + specialIt.nextIndex());
+            System.out.println("Previous index: " + specialIt.previousIndex());
             
-            // Modificação durante iteração
-            specialIt.set("MODIFICADO"); // Substitui o elemento atual
-            specialIt.add("NOVO");       // Adiciona novo elemento
+            // Modification during iteration
+            specialIt.set("MODIFIED"); // Replace current element
+            specialIt.add("NEW");       // Add new element
         }
-        System.out.println("Lista após modificações com ListIterator: " + lista);
+        System.out.println("List after ListIterator modifications: " + list);
         
-        // ===== LIMPEZA =====
-        System.out.println("\n=== LIMPEZA ===");
-        List<String> listaParaLimpar = new ArrayList<>(lista);
-        listaParaLimpar.clear();
-        System.out.println("Lista após clear(): " + listaParaLimpar);
-        System.out.println("Está vazia? " + listaParaLimpar.isEmpty());
+        // ===== CLEANUP =====
+        System.out.println("\n=== CLEANUP ===");
+        List<String> listToClean = new ArrayList<>(list);
+        listToClean.clear();
+        System.out.println("List after clear(): " + listToClean);
+        System.out.println("Is empty? " + listToClean.isEmpty());
     }
 }
 
